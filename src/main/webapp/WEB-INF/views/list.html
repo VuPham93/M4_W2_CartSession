@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Product List</h1>
+<h4><a th:href="@{/cart/toCart}" th:text="${'Go to cart'}"></a></h4>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Discount(%)</th>
+    </tr>
+    <th:block th:each="product: ${listProduct}">
+        <tr>
+            <td th:text="${product.id}"></td>
+            <td><a th:text="${product.name}" th:href="@{/cart/detail/__${product.id}__}"></a></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.discount}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

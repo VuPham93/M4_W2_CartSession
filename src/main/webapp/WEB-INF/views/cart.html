@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4><a th:href="@{/cart}" th:text="${'Back to product list'}"></a></h4>
+<table border="1">
+    <tr>
+        <th>Product name</th>
+        <th>Sell price</th>
+        <th>Number</th>
+        <th>Total</th>
+        <th>Remove</th>
+    </tr>
+    <th:block th:each="product: ${selectedProduct}">
+        <tr>
+            <td th:text="${product.getKey().name}"></td>
+            <td th:text="${product.getKey().sellPrice}"></td>
+            <td>
+                <form th:action="@{changeNumber/__${product.getKey().getId()}__/}">
+                    <input type="number" name="number" th:placeholder="${product.getValue()}">
+                    <input type="submit" value="Save">
+                </form>
+            </td>
+            <td th:text="${product.getValue() * product.getKey().sellPrice}"></td>
+            <td><a th:href="@{remove/__${product.getKey().id}__}" th:text="${'remove'}"></a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
